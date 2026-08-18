@@ -1,556 +1,429 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-<title>Network Simulator NS-2 trace files analyzer - Tracegraph</title>
-<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"> 
-<META Name="revisit-after" Content="1 Day">
-<META Name="Description" Content="Network simulations trace analysis, 2D/3D Visualization, wireless and wired networks, network solutions for packets monitoring">
-<META Name="Keywords" Content="network simulator, trace graph, ns-2, ns2, ns, trace analysis, trace files, network simulation, network monitor, trace analyze, ns3, ns traces graphs, ns-2 traces analysis, packets sniffer, network solutions, manet">
-<META Name="Author" Content="Jaroslaw Malek">
-<style>
-<!--
-.tgdef       { font-family: Verdana; font-size: 11px }
--->
-</style>
+    <title>Network Simulator NS-2 trace files analyzer - Tracegraph Version History</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"> 
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="revisit-after" content="1 Day">
+    <meta name="Description" content="Network simulations trace analysis, 2D/3D Visualization, wireless and wired networks, network solutions for packets monitoring">
+    <meta name="Keywords" content="network simulator, trace graph, ns-2, ns2, ns, trace analysis, trace files, network simulation, network monitor, trace analyze, ns3, ns traces graphs, ns-2 traces analysis, packets sniffer, network solutions, manet">
+    <meta name="Author" content="Jaroslaw Malek">
+
+    <style>
+        :root {
+            --primary: #0284c7;
+            --primary-hover: #0369a1;
+            --bg-main: #f8fafc;
+            --card-bg: #ffffff;
+            --text-main: #1e293b;
+            --text-muted: #64748b;
+            --border-color: #e2e8f0;
+            --accent: #0f172a;
+            --tag-fix-bg: #fef2f2;
+            --tag-fix-text: #b91c1c;
+            --tag-feature-bg: #f0fdf4;
+            --tag-feature-text: #15803d;
+            --tag-perf-bg: #eff6ff;
+            --tag-perf-text: #1d4ed8;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--bg-main);
+            color: var(--text-main);
+            line-height: 1.6;
+            padding: 24px 16px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        header {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 32px 24px;
+            margin-bottom: 24px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 26px;
+            color: var(--accent);
+            margin-bottom: 8px;
+            line-height: 1.3;
+        }
+
+        .subtitle {
+            color: var(--text-muted);
+            font-size: 15px;
+            margin-bottom: 20px;
+        }
+
+        .btn-group {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 12px;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.2s ease;
+        }
+
+        .btn-primary {
+            background-color: var(--primary);
+            color: #ffffff;
+        }
+
+        .btn-primary:hover {
+            background-color: var(--primary-hover);
+        }
+
+        .btn-secondary {
+            background-color: #ffffff;
+            color: var(--text-main);
+            border: 1px solid var(--border-color);
+        }
+
+        .btn-secondary:hover {
+            background-color: #f1f5f9;
+        }
+
+        .version-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 24px;
+            margin-bottom: 20px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+        }
+
+        .version-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 16px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #f1f5f9;
+        }
+
+        .version-title {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--accent);
+        }
+
+        .version-date {
+            font-size: 13px;
+            font-weight: 600;
+            background: #f1f5f9;
+            color: var(--text-muted);
+            padding: 4px 10px;
+            border-radius: 6px;
+        }
+
+        .section-subtitle {
+            font-size: 14px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin: 14px 0 8px 0;
+            display: inline-block;
+            padding: 2px 8px;
+            border-radius: 4px;
+        }
+
+        .section-fixes {
+            background-color: var(--tag-fix-bg);
+            color: var(--tag-fix-text);
+        }
+
+        .section-features {
+            background-color: var(--tag-feature-bg);
+            color: var(--tag-feature-text);
+        }
+
+        .section-perf {
+            background-color: var(--tag-perf-bg);
+            color: var(--tag-perf-text);
+        }
+
+        ul.changelog-list {
+            list-style: none;
+            padding-left: 0;
+            margin-bottom: 12px;
+        }
+
+        ul.changelog-list li {
+            position: relative;
+            padding-left: 20px;
+            margin-bottom: 8px;
+            font-size: 14px;
+            color: #334155;
+        }
+
+        ul.changelog-list li::before {
+            content: "•";
+            position: absolute;
+            left: 6px;
+            color: var(--primary);
+            font-weight: bold;
+        }
+
+        a {
+            color: var(--primary);
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        footer {
+            text-align: center;
+            font-size: 13px;
+            color: var(--text-muted);
+            padding: 16px 0;
+        }
+    </style>
 </head>
+<body>
 
-<body class="tgdef">
+<div class="container">
+    <header>
+        <h1>Trace graph</h1>
+        <p class="subtitle">Version History & Release Notes</p>
+        
+        <div class="btn-group">
+            <a href="downloadtracegraph.html" class="btn btn-primary">Download Trace graph</a>
+            <a href="traceconverter.html" class="btn btn-secondary">Trace converter</a>
+            <a href="index.html" class="btn btn-secondary">Home</a>
+        </div>
+    </header>
 
-<p><a href="index.html"> <b> Trace graph</b></a> version history</p>
-<p>date format is MM/DD/YYYY<br>
-</p>
+    <!-- 2.05 -->
+    <div class="version-card">
+        <div class="version-header">
+            <span class="version-title">Version 2.05</span>
+            <span class="version-date">05/24/2007</span>
+        </div>
+        <span class="section-subtitle section-fixes">Bug Fixes</span>
+        <ul class="changelog-list">
+            <li>Number of forwarded packets calculations are correct for wireless and wired-wireless trace formats (both old and new trace) [present since 2.03].</li>
+            <li>Number of nodes calculation and node numbers are correct for wireless and wired-wireless trace formats (both old and new trace) with hexadecimal node numbers (fixed issue when >10 nodes) [present since 2.03].</li>
+            <li>Sequence numbers are correctly extracted from <code>-Ps</code> tags for new trace and wired-new trace formats [present since 2.03].</li>
+            <li>Fixed automatic recognition bug for trace formats with IP addresses ("Index exceeds matrix dimensions" message) [present since 1.90b].</li>
+        </ul>
+    </div>
 
-<p style="margin-top: 2; margin-bottom: 2">
-2.05 (05/24/2007)<br>
------------------<br>
-* fixes (the bugs have been present since versions in brackets):<br>
-  - number of forwarded packets calculations are correct<br>
-&nbsp;&nbsp;for wireless and wired-wireless trace formats (both old and new trace), (2.03)<br>
-  - number of nodes calculation and node numbers are correct<br>
-&nbsp;&nbsp;for wireless and wired-wireless trace formats (both old and new trace)<br>
-&nbsp;&nbsp;with hexadecimal node numbers, the bug was appearing if there were more than 10 nodes, (2.03)<br>
-  - sequence numbers are correctly extracted from "-Ps" tags<br>
-&nbsp;&nbsp;for new trace and wired-new trace formats (2.03)<br>
-  - trace format with IP addresses automatic recognition bug:<br>
-&nbsp;&nbsp;there was "Index exceeds matrix dimensions" message, (1.90b)<br>
-<br>
-2.04 (01/09/2006)<br>
------------------<br>
-* new features:<br>
-  - calculations which are always done after loading a trace file&nbsp;<br>
-&nbsp; (concerns trace formats: old wireless, new trace,&nbsp;<br>
-&nbsp; wired-old wireless, wired-new trace and Trace graph format)<br>
-&nbsp; containing drop events are over 1000x faster, for example<br>
-&nbsp; the calculations after loading a new trace format file of size 20MB&nbsp;<br>
-&nbsp; with 20000 drop events took 170 seconds using Trace graph 2.03,<br>
-&nbsp; with the new version 2.04 the calculations took only 0.13 sec.,<br>
-&nbsp; so trace file (with many drop events) loading time is much shorter<br>
-<br>
-2.03 (11/07/2005)<br>
------------------<br>
-* new features:<br>
-  - wired trace files are loaded at least 4.5x (450%) faster<br>
-  - old wireless trace files are loaded at least 2.2x faster<br>
-  - old wireless trace files with hexadecimal node numbers<br>
-&nbsp; are loaded at least 5.2x faster<br>
-  - new trace format files are loaded at least 1.9x faster<br>
-  - new trace format files with hexadecimal node numbers<br>
-&nbsp; are loaded at least 3.5x faster<br>
-  - wired-wireless trace files are loaded at least 2x faster<br>
-  - wired-wireless trace files with hexadecimal node numbers<br>
-&nbsp; are loaded at least 2.2x faster<br>
-  - tracegraph format files are loaded at least 3x faster<br>
-  - new tracegraph file format with hexadecimal node numbers<br>
-  - at least 4x faster IP addresses to node numbers conversion<br>
-  - at least 2x faster searching for IP addresses in trace files (e.g. -ip option)<br>
-  - 10x faster constants (e.g. packet types) calculations<br>
-&nbsp; which are done after every trace file (except .mat files) is loaded<br>
-* fixes:<br>
-  - automatic IP addresses recognition bug<br>
-  - trace format of files with number of lines lower than&nbsp;<br>
-&nbsp; MAXIMAL NUMBER OF LINES is recognized properly<br>
-&nbsp; when AUTOMATIC FORMAT DETECTION is ON<br>
-<br>
-2.02 (06/22/2003)<br>
------------------<br>
-* IP conversion bug fixed (when there is no 'ip' in the header)<br>
-* all drop events bugs fixed (when packet type option is unselected)<br>
-* copying to clipboard bug fixed<br>
-<br>
-2.01 (03/10/2003)<br>
------------------<br>
-* 'statistics' description has been replaced by 'information'<br>
-* Trace graph script file format has been changed<br>
-* a wireless trace files loading bug fixed<br>
-* time interval bug fixed (when loading a trace file)<br>
-<br>
-2.00b (12/13/2002)<br>
-------------------<br>
-* new statistics:<br>
-  - Simulation Round Trip Times<br>
-  - Round Trip Times between Current and Other node<br>
-* new 2D graphs:<br>
-  - Throughput of sending bits vs minimal simulation RTT<br>
-  - Throughput of sending bits vs average simulation RTT<br>
-  - Throughput of sending bits vs maximal simulation RTT<br>
-  - Throughput of sending bits vs minimal RTT between CN and ON<br>
-  - Throughput of sending bits vs average RTT between CN and ON<br>
-  - Throughput of sending bits vs maximal RTT between CN and ON<br>
-  - Sent packet size vs minimal simulation RTT<br>
-  - Sent packet size vs average simulation RTT<br>
-  - Sent packet size vs maximal simulation RTT<br>
-  - Sent packet size vs minimal RTT between CN and ON<br>
-  - Sent packet size vs average RTT between CN and ON<br>
-  - Sent packet size vs maximal RTT between CN and ON<br>
-  - Simulation RTT cumulative distribution<br>
-  - RTT between CN and ON cumulative distribution<br>
-  - Sent packet ID vs simulation RTT<br>
-  - Sent packet ID vs RTT between CN and ON<br>
-  - Simulation RTT frequency distribution<br>
-  - RTT between CN and ON frequency distribution<br>
-* main window has been reorganized<br>
-* throughput graphs bug fixed<br>
-* trace level at destination node bug fixed&nbsp;<br>
-* trace level description for delays bug fixed<br>
-* main window bugs fixed<br>
-<br>
-1.92b (12/02/2002)<br>
-------------------<br>
-* faster 3D graphs calculations<br>
-<br>
-1.91b (11/28/2002)<br>
-------------------<br>
-* automatic format detection bugs fixed<br>
-* configuration file bug fixed<br>
-* -ip option bug fixed<br>
-<br>
-1.90b (11/25/2002)<br>
-------------------<br>
-* automatic detection of all supported file formats - file header is not needed (see help 11)<br>
-* new configuration file options (see help 11)<br>
-* axes labels and graph title are editable<br>
-* path and file name is shown in Graphs and Statistics window<br>
-<br>
-1.88b (11/17/2002)<br>
-------------------<br>
-* graphs statistics (minimum/average/maximum value, standard deviation, median) can be saved (see help 3.17)<br>
-* Log scaling on X, Y and Z axes (see help 3.18)<br>
-* graphs can be loaded from .trg text files (see help 3.19)<br>
-* Trace graph scripts are checked before processing<br>
-* throughput vs delay graphs have been changed<br>
-* faster throughput calculations<br>
-* 100 new 2D graphs (see help 4, 6):<br>
-  - Packet size vs min throughput of generating/sending/receiving/forwarding/dropping packets at current node<br>
-  - Packet size vs min throughput of generating/sending/receiving/forwarding/dropping packets<br>
-  - Packet size vs min throughput of generating/sending/receiving/forwarding/dropping bits at current node<br>
-  - Packet size vs min throughput of generating/sending/receiving/forwarding/dropping bits<br>
-  - Packet size vs avg throughput of generating/sending/receiving/forwarding/dropping packets at current node<br>
-  - Packet size vs avg throughput of generating/sending/receiving/forwarding/dropping packets<br>
-  - Packet size vs avg throughput of generating/sending/receiving/forwarding/dropping bits at current node<br>
-  - Packet size vs avg throughput of generating/sending/receiving/forwarding/dropping bits<br>
-  - Packet size vs max throughput of generating/sending/receiving/forwarding/dropping packets at current node<br>
-  - Packet size vs max throughput of generating/sending/receiving/forwarding/dropping packets<br>
-  - Packet size vs max throughput of generating/sending/receiving/forwarding/dropping bits at current node<br>
-  - Packet size vs max throughput of generating/sending/receiving/forwarding/dropping bits<br>
-  - Throughput of sending bits vs minimal/average/maximal simulation jitter<br>
-  - Throughput of receiving bits vs minimal/average/maximal simulation jitter<br>
-  - Throughput of sending bits at CN vs minimal/average/maximal jitter between CN and ON<br>
-  - Throughput of receiving bits vs minimal/average/maximal simulation processing time<br>
-  - Throughput of forwarding bits vs minimal/average/maximal simulation processing time<br>
-  - Throughput of receiving bits at CN vs minimal/average/maximal processing time at CN<br>
-  - Throughput of forwarding bits at CN vs minimal/average/maximal processing time at CN<br>
-  - Throughput of receiving bits at ON vs minimal/average/maximal jitter between CN and ON<br>
-  - Packet size vs minimal/average/maximal simulation processing time<br>
-  - Packet size vs minimal/average/maximal processing time at current node<br>
-  - Packet size vs minimal/average/maximal simulation End2End delay<br>
-  - Packet size vs minimal/average/maximal CN2ON delay<br>
-  - Simulation jitter frequency distribution<br>
-  - Jitter between CN and ON frequency distribution<br>
-  - Simulation jitter cumulative distribution<br>
-  - Jitter between CN and ON cumulative distribution<br>
-* zoom bug fixed (when legend is on/off)<br>
-<br>
-1.71b (10/23/2002)<br>
-------------------<br>
-* script files processing bug fixed<br>
-* ns format trace files from bluehoc simulations can be read<br>
-* turbo mode and processing times bug fixed<br>
-<br>
-1.70b (10/22/2002)<br>
-------------------<br>
-* faster delays calculations<br>
-* faster processing times calculations<br>
-* faster jitter calculations<br>
-* faster calculations concerning numbers of intermediate nodes&nbsp;<br>
-* faster calculations after loading trace files<br>
-* code optimization<br>
-* turbo mode for delays and jitter calculations<br>
-* configuration file has been added<br>
-* button for switching between current and other node has been added<br>
-* trace files with any extension can be read<br>
-* satellite trace format reading bug fixed<br>
-* IP to node number conversion bug fixed<br>
-* a trace files parsing bug fixed<br>
-<br>
-1.60b (07/01/2002)<br>
-------------------<br>
-* Trace graph scripts can be written to analyse trace or mat files automatically (see help 10)<br>
-<br>
-1.57b (06/18/2002)<br>
-------------------<br>
-* Packet size option (see help 7)<br>
-* Count packets IDs only once option works with drop events (see help 3.5)<br>
-* mat file format has been changed (packets sizes are saved)<br>
-* axes bug fixed (when loading a file with Overlay graphs option on)<br>
-* zoom bug fixed (when refreshing a 3D graph)<br>
-<br>
-1.55c (06/02/2002)<br>
-------------------<br>
-* flow ID bug fixed (when loading a mat file)<br>
-<br>
-1.55b (06/01/2002)<br>
-------------------<br>
-* trace level (AGT, RTR, MAC) options for End2End delays (wireless, mixed and Trace graph formats only)<br>
-<br>
-1.54b (05/26/2002)<br>
-------------------<br>
-* flow ID option added for wired trace files<br>
-* new 2D graphs added:<br>
-  - Forward events time vs simulation processing times at intermediate nodes<br>
-  - Forward events time vs processing times at current node<br>
-  - Receive events time vs simulation processing times at intermediate nodes<br>
-  - Receive events time vs processing times at current node<br>
-* mat file format has been changed (flow ID added)<br>
-<br>
-1.52b (05/23/2002)<br>
-------------------<br>
-* separate windows for graphs and statistics<br>
-* new statistics added:<br>
-  - Average numbers of intermediate nodes for the whole network<br>
-  - Average numbers of intermediate nodes between current and other node<br>
-  - Simulation processing times at intermediate nodes<br>
-  - Processing times at current node<br>
-* new 2D graphs added:<br>
-  - Simulation processing times frequency distribution<br>
-  - Processing times at current node frequency distribution<br>
-  - Packets IDs vs simulation processing times<br>
-  - Packets IDs vs processing times at current node<br>
-  - Simulation processing times cumulative distribution<br>
-  - Processing times at current node cumulative distribution<br>
-* all the known bugs fixed:<br>
-  - numbers of forwarded and lost packets at current node (stats and graphs)<br>
-  - numbers of intermediate nodes forwarding packets for wireless files<br>
-<br>
-1.46b (05/06/2002)<br>
-------------------<br>
-* packet types can be selected/deselected (see help 7)<br>
-* all lines from wireless trace files are loaded now<br>
-* mat file format has been changed (+ and - added in packet type)<br>
-* calculations after trace file loading have been changed<br>
-* number of forwarded packets and bytes in simulation statistics fixed (wireless simulations only)<br>
-* number of lost packets in simulation statistics fixed<br>
-<br>
-1.44b (04/24/2002)<br>
-------------------<br>
-* new 2D graphs added (see help 4):<br>
-  - Packets IDs vs simulation jitter<br>
-  - Packets IDs vs jitter between CN and ON<br>
-* X and Y axes labels added<br>
-<br>
-1.43b (04/22/2002)<br>
-------------------<br>
-* new 2D graphs added (see help 4):<br>
-  - All send events time vs number of intermediate nodes (receiving and forwarding packets)<br>
-  - Send events time at CN vs number of intermediate nodes (receiving and forwarding packets)<br>
-  - All receive events time vs number of intermediate nodes (receiving and forwarding packets)<br>
-  - Receive events time at ON vs number of intermediate nodes (receiving and forwarding packets)<br>
-  - All packets IDs vs number of intermediate nodes (receiving and forwarding packets)<br>
-  - Packets IDs vs number of intermediate nodes (receiving and forwarding packets)<br>
-* edges can be specified for histograms (see help 6)<br>
-* a part of code concerning delays has been changed<br>
-* zoom bug fixed (when automatically refresh graphs option is on)<br>
-<br>
-1.40b (04/06/2002)<br>
-------------------<br>
-* wired + wireless format support (see help 9.4)<br>
-* wired + new trace file format support (see help 9.5)<br>
-* IP addresses support (see help 9)<br>
-* new 2D graphs added (see help 4):<br>
-  - Throughput of sending bits vs minimal simulation End2End delays<br>
-  - Throughput of sending bits vs average simulation End2End delays<br>
-  - Throughput of sending bits vs maximal simulation End2End delays<br>
-  - Throughput of receiving bits vs minimal simulation End2End delays<br>
-  - Throughput of receiving bits vs average simulation End2End delays<br>
-  - Throughput of receiving bits vs maximal simulation End2End delays<br>
-  - Throughput of sending bits at CN vs minimal CN2ON delays<br>
-  - Throughput of sending bits at CN vs average CN2ON delays<br>
-  - Throughput of sending bits at CN vs maximal CN2ON delays<br>
-  - Throughput of receiving bits at ON vs minimal CN2ON delays<br>
-  - Throughput of receiving bits at ON vs average CN2ON delays<br>
-  - Throughput of receiving bits at ON vs maximal CN2ON delays<br>
-  - Send events time vs simulation jitter<br>
-  - Send events time vs jitter between CN and ON<br>
-  - Receive events time vs simulation jitter<br>
-  - Receive events time vs jitter between CN and ON<br>
-  - Send events time vs simulation End2End delays<br>
-  - Send events time vs CN2ON delays<br>
-  - Receive events time vs simulation End2End delays<br>
-  - Receive events time vs CN2ON delays<br>
-  - Packets IDs vs simulation End2End delays<br>
-  - Packets IDs vs CN2ON delays<br>
-* minor or major grid can be added to the axes (see help, 3.10, 3.11)<br>
-* each plotted point can be marked (see help, 3.9)<br>
-* a wireless format extension added<br>
-* hexadecimal to decimal conversion for -Ms field in new trace file format added<br>
-* cumulative delays distribution functions are calculated faster<br>
-* a trace file with it's full path can be read from the command line<br>
-* bandwidth (name) has been changed to throughput<br>
-* file reading and saving errors are catched<br>
-* start time and end time from the command line have to be numbers (fixed)<br>
-<br>
-1.30b (03/07/2002)<br>
-------------------<br>
-* all the known bugs concerning loading trace files with time interval fixed<br>
-* jitter of sent packets at current node bug fixed<br>
-* problems with reading files in Trace graph format fixed<br>
-* start time cannot be smaller than zero when reading a file from the command line<br>
-* other node bug fixed (when checking the option without a loaded file)<br>
-* zoom and legend options bugs fixed (when checking the options without a loaded file)<br>
-<br>
-1.29b (03/06/2002)<br>
-------------------<br>
-* bandwidth calculations bugs fixed<br>
-<br>
-1.28b (02/27/2002)<br>
-------------------<br>
-* new 2D graphs added:<br>
-  - Jitter of sent packets at current node<br>
-  - Jitter of generated packets at current node<br>
-  - Jitter of forwarded packets at current node<br>
-  - Jitter of dropped packets at current node<br>
-  - Jitter of all the generated packets<br>
-  - Jitter of all the sent packets<br>
-  - Jitter of all the received packets<br>
-  - Jitter of all the forwarded packets<br>
-  - Jitter of all the dropped packets<br>
-* bandwidth graphs names have been changed<br>
-* some jitter bugs fixed<br>
-<br>
-1.27b (02/25/2002)<br>
-------------------<br>
-* new 2D graphs added:<br>
-  - IDs of all the generated packets<br>
-  - IDs of all the sent packets<br>
-  - IDs of all the received packets<br>
-  - IDs of all the forwarded packets<br>
-  - IDs of all the dropped packets<br>
-  - IDs of generated packets at current node<br>
-  - IDs of sent packets at current node<br>
-  - IDs of received packets at current node<br>
-  - IDs of dropped packets at current node<br>
-  - IDs of forwarded packets at current node<br>
-  - Sequence numbers of generated packets at current node<br>
-  - Sequence numbers of sent packets at current node<br>
-  - Sequence numbers of received packets at current node<br>
-  - Sequence numbers of forwarded packets at current node<br>
-  - Sequence numbers of dropped packets at current node<br>
-  - Sequence numbers of all the generated packets<br>
-  - Sequence numbers of all the sent packets<br>
-  - Sequence numbers of all the received packets<br>
-  - Sequence numbers of all the forwarded packets<br>
-  - Sequence numbers of all the dropped packets<br>
-  - Bandwidth at current node (dropped packets)<br>
-  - Bandwidth (dropped packets)<br>
-  - Bandwidth at current node (dropped bits)<br>
-  - Bandwidth (dropped bits)<br>
-* menu has been reorganized (some names have been changed, see help)<br>
-* DC bug in graphs legend fixed<br>
-* Number of forwarded packets and bytes (when CN=ON) in Current node statistics fixed<br>
-* Zoom bug fixed<br>
-<br>
-1.24b (02/20/2002)<br>
-------------------<br>
-* Automatically change information (new option, see help 3.9)<br>
-* Count packets IDs only once (new option, see help 3.10)<br>
-* new 2D graphs added (see help 4):<br>
-  - Cumulated sum of generated packets sizes at current node<br>
-  - Cumulated sum of dropped packets sizes at current node<br>
-  - Cumulated sum of generated packets sizes (all)<br>
-  - Cumulated sum of sent packets sizes (all)<br>
-  - Cumulated sum of received packets sizes (all)<br>
-  - Cumulated sum of dropped packets sizes (all)<br>
-  - Cumulated sum of forwarded packets sizes (all)<br>
-  - Bandwidth at current node (generated bits)<br>
-  - Bandwidth (generated bits)<br>
-  - Bandwidth at current node (generated packets)<br>
-  - Bandwidth at current node (sent packets)<br>
-  - Bandwidth at current node (received packets)<br>
-  - Bandwidth at current node (forwarded packets)<br>
-  - Bandwidth (generated packets)<br>
-  - Bandwidth (sent packets)<br>
-  - Bandwidth (received packets)<br>
-  - Bandwidth (forwarded packets)<br>
-* new 3D graphs added (see help 5):<br>
-  - Numbers of sent bytes at all the nodes<br>
-  - Numbers of received bytes at all the nodes<br>
-  - Numbers of forwarded bytes at all the nodes<br>
-  - Numbers of dropped bytes at all the nodes<br>
-  - Numbers of generated bytes at all the nodes<br>
-  - Numbers of lost bytes at all the nodes<br>
-* numbers of generated packets in wireless simulations fixed<br>
-<br>
-1.22b (02/13/2002)<br>
-------------------<br>
-* 3 times faster delays calculations<br>
-<br>
-1.21b (02/11/2002)<br>
-------------------<br>
-* mat file format has been changed<br>
-* all the known bugs concerning loading files with time interval fixed<br>
-* all the known bugs concerning loading files in wired format fixed<br>
-* a packet type bug fixed<br>
-* numbers of generated, sent, forwarded, dropped and lost packets in wired simulations fixed<br>
-* Simulation length is calculated when Time interval option is on<br>
-<br>
-1.20b (01/20/2002)<br>
-------------------<br>
-* saving all the information to text files added (see help.txt, 3.8)<br>
-* text files are saved to a trace file or a mat file directory<br>
-* spaces after packet type removed in descriptions<br>
-* saved text files names have been changed a little (no more ',' instead of '.')<br>
-<br>
-1.19b (01/18/2002)<br>
-------------------<br>
-* trace files loading up to about 5 (NS-2 formats) or 50 (Trace graph's format)<br>
-  times faster (see help.txt, 1.2)<br>
-* Trace graph's trace file format has been changed a little (see help.txt, 9.4)<br>
-<br>
-1.18b (01/16/2002)<br>
-------------------<br>
-* not used lines are skipped during wired format loading (see help.txt, 9.1)<br>
-* a wireless format reading problem fixed<br>
-<br>
-1.17b (01/15/2002)<br>
-------------------<br>
-* saving graphs option bugs fixed (when saving 3D graphs data)<br>
-* a wireless format reading problem concerning TORA routing fixed<br>
-* a wired format reading problem fixed<br>
-<br>
-1.16b (01/14/2002)<br>
-------------------<br>
-* saving plotted data into text files added (see help.txt, 3.7)<br>
-* hexadecimal nodes numbers reading from wireless format added (see help.txt, chapter 9)<br>
-* 3D graphs names has been changed a little<br>
-* X axis description in jitter graph has been changed to sequence number<br>
-* an '... isempty ...' warning fixed<br>
-<br>
-1.15b (01/11/2002)<br>
-------------------<br>
-* saving graphs window to jpeg and tiff added (see help.txt, 1.3, 1.4)<br>
-* copying graphs window to clipboard added (see help.txt, 1.5)<br>
-* 2D graphs concerning all the network 'r' events use Direct connection option (see help.txt, chapter 4)<br>
-* some speed improvements<br>
-* 2D graphs concerning all the network bugs fixed (when Other node is ON)<br>
-* 3D graphs fixed<br>
-* legend bugs for 2D graphs concerning all the network fixed&nbsp;<br>
-  (when Other node is CHECKED and/or Direct connection is ON)<br>
-* 'f' and 'd' events fixed in both wireless formats with MAC trace level<br>
-* wireless format with MAC trace level (see help.txt, 9.2) reading error fixed<br>
-* delays bugs fixed<br>
-* zoom on and legend on bugs fixed<br>
-<br>
-1.13b (01/07/2002)<br>
-------------------<br>
-* number of lost packets added in Simulation information menu&nbsp;<br>
-  and Current node information menu (see help.txt, 2.1, 2.2)<br>
-* new 3D graph added:<br>
-  - Sum of lost packets at all the nodes (see help.txt, chapter 5)<br>
-* Bandwidth (receiving) and Cumulated sum of received packets (all) graphs fixed (wired format)<br>
-* 'r' events bugs in graphs and information fixed<br>
-* 's' events bugs in graphs fixed<br>
-* 'f' events bugs in graphs fixed<br>
-* 's' and 'f' events graphs plotting speed improved<br>
-<br>
-1.12b (01/02/2002)<br>
-------------------<br>
-* new delays 2D graphs added (see help.txt, chapter 4)<br>
-  - Cumulative distribution function for all delays<br>
-  - Cumulative distribution function for delays between 2 nodes<br>
-* delays between forward and receive events (see help.txt, 2.4)<br>
-* graphs zoom on/off option (see help.txt, 3.5)<br>
-* graphs legend on/off option (see help.txt, 3.6)<br>
-* delays information and histograms errors fixed<br>
-* number of received packets fixed in graphs and information (both wireless formats)<br>
-* number of sent packets partially fixed in graphs and information (both wireless formats)<br>
-* problems with reading some wireless trace files fixed (please read help.txt, chapter 9)<br>
-<br>
-1.10b (12/28/2001)<br>
-------------------<br>
-* new-trace file format support added (see http://www.isi.edu/nsnam/ns/doc/node168.html for details)<br>
-* now you can convert your trace file format into Trace graph's file format (see help.txt, chapter 9.4)<br>
-  what means YOU CAN LOAD ANY TRACE FORMAT FILES after conversion not only NS trace format files !<br>
-* now you can set time interval in which data is analysed (see help.txt, 3.3)<br>
-* now you can check direct (or not) transmission between 2 nodes (see help.txt, 3.4)<br>
-* MAC trace level support added (not sure if properly)<br>
-* number of sending/receiving nodes in Simulation information menu fixed<br>
-* number of forwarded packets in Information menu and graphs fixed<br>
-* packets sizes in Current node information menu fixed<br>
-* program menu has been reorganized (see help.txt for details)<br>
-* more than one Trace graph program can be run at the same time<br>
-* End2End simulation delays (see help.txt, 2.3)<br>
-* End2End delays between current and other nodes (see help.txt, 2.4)<br>
-* new graphs added (see help.txt, chapters 4, 5, 6)<br>
-  - Sum of number of generated packets at all the nodes (3D)<br>
-  - Cumulated sum of number of generated packets at current node<br>
-  - Cumulated sum of number of generated packets for the whole network<br>
-  - Cumulated sum of number of sent packets for the whole network<br>
-  - Cumulated sum of number of forwarded packets for the whole network<br>
-  - Cumulated sum of number of received packets for the whole network<br>
-  - Cumulated sum of number of dropped packets for the whole network<br>
-  - Bandwidth (sending) for the whole network<br>
-  - Bandwidth (receiving) for the whole network<br>
-  - Bandwidth (forwarding) for the whole network<br>
-  - Numbers of simulation End2End delays (HISTOGRAM)<br>
-  - Number of End2End (Current node 2 Other node) delays (HISTOGRAM)<br>
-* several other bugs fixed<br>
-<br>
-1.05b (12/19/2001)<br>
-------------------<br>
-* new graphs added<br>
-  - bandwidth at Current node (sending) graph added<br>
-  - bandwidth at Current node (forwarding) graph added<br>
-* problems with reading some wired and wireless trace files fixed<br>
-* several bugs fixed<br>
-<br>
-1.04b (12/18/2001)<br>
-------------------<br>
-* all the graphs fixed<br>
-* new graphs added<br>
-  - Sum of number of sent packets at all the nodes (3D)<br>
-  - Sum of number of forwarded packets at all the nodes (3D)<br>
-  - Cumulated sum of forwarded packets size at current node<br>
-  - Cumulated sum of number of forwarded packets at current node<br>
-* send &amp; drop events analysis fixed<br>
-* code optimization<br>
-<br>
-1.03b (12/17/2001)<br>
-------------------<br>
-* new information in Current node information menu:<br>
-  - number of generated packets<br>
-  - number of forwarded packets<br>
-  - number of forwarded bytes<br>
-* speed improvements<br>
-* bugs in Current node information menu fixed<br>
-<br>
-1.02b (12/16/2001)<br>
-------------------<br>
-* support for wireless format (see http://www.isi.edu/nsnam/ns/doc/node166.html for details)<br>
-* very fast file loading and saving (see help.txt, chapter 1, for details)<br>
-* new information in Simulation information menu:<br>
-  - number of generated packets<br>
-  - number of forwarded packets<br>
-  - number of forwarded bytes<br>
-* all the known bugs in Simulation information menu fixed</p>
+    <!-- 2.04 -->
+    <div class="version-card">
+        <div class="version-header">
+            <span class="version-title">Version 2.04</span>
+            <span class="version-date">01/09/2006</span>
+        </div>
+        <span class="section-subtitle section-perf">Performance & New Features</span>
+        <ul class="changelog-list">
+            <li>Calculations performed after loading trace files with drop events are over <strong>1000x faster</strong> (applies to old wireless, new trace, wired-old wireless, wired-new trace, and Trace graph format).</li>
+            <li>Loading time benchmark: post-load calculations for a 20MB new trace file with 20,000 drop events dropped from 170 seconds in v2.03 to just <strong>0.13 seconds</strong> in v2.04.</li>
+        </ul>
+    </div>
+
+    <!-- 2.03 -->
+    <div class="version-card">
+        <div class="version-header">
+            <span class="version-title">Version 2.03</span>
+            <span class="version-date">11/07/2005</span>
+        </div>
+        <span class="section-subtitle section-perf">Performance Improvements</span>
+        <ul class="changelog-list">
+            <li>Wired trace files load at least <strong>4.5x (450%) faster</strong>.</li>
+            <li>Old wireless trace files load at least <strong>2.2x faster</strong> (5.2x faster with hexadecimal node numbers).</li>
+            <li>New trace format files load at least <strong>1.9x faster</strong> (3.5x faster with hexadecimal node numbers).</li>
+            <li>Wired-wireless trace files load at least <strong>2x faster</strong> (2.2x faster with hexadecimal node numbers).</li>
+            <li>Trace graph format files load at least <strong>3x faster</strong>.</li>
+            <li>At least <strong>4x faster</strong> IP addresses to node numbers conversion.</li>
+            <li>At least <strong>2x faster</strong> searching for IP addresses in trace files (e.g. <code>-ip</code> option).</li>
+            <li><strong>10x faster</strong> constants (e.g. packet types) calculations performed after loading non-.mat trace files.</li>
+            <li>Added new Trace graph file format support with hexadecimal node numbers.</li>
+        </ul>
+        <span class="section-subtitle section-fixes">Bug Fixes</span>
+        <ul class="changelog-list">
+            <li>Fixed automatic IP addresses recognition bug.</li>
+            <li>Trace format of files with line count lower than MAXIMAL NUMBER OF LINES is now recognized properly when AUTOMATIC FORMAT DETECTION is ON.</li>
+        </ul>
+    </div>
+
+    <!-- 2.02 -->
+    <div class="version-card">
+        <div class="version-header">
+            <span class="version-title">Version 2.02</span>
+            <span class="version-date">06/22/2003</span>
+        </div>
+        <span class="section-subtitle section-fixes">Bug Fixes</span>
+        <ul class="changelog-list">
+            <li>Fixed IP conversion bug when there is no 'ip' header present.</li>
+            <li>Fixed all drop events bugs when the packet type option is unselected.</li>
+            <li>Fixed copying graphs window to clipboard.</li>
+        </ul>
+    </div>
+
+    <!-- 2.01 -->
+    <div class="version-card">
+        <div class="version-header">
+            <span class="version-title">Version 2.01</span>
+            <span class="version-date">03/10/2003</span>
+        </div>
+        <span class="section-subtitle section-features">Changes & Fixes</span>
+        <ul class="changelog-list">
+            <li>Replaced 'statistics' description with 'information'.</li>
+            <li>Updated Trace graph script file format.</li>
+            <li>Fixed wireless trace files loading bug and time interval loading bug.</li>
+        </ul>
+    </div>
+
+    <!-- 2.00b -->
+    <div class="version-card">
+        <div class="version-header">
+            <span class="version-title">Version 2.00b</span>
+            <span class="version-date">12/13/2002</span>
+        </div>
+        <span class="section-subtitle section-features">New Statistics & 2D Graphs</span>
+        <ul class="changelog-list">
+            <li>Added Simulation Round Trip Times (RTT) and RTT between Current Node (CN) and Other Node (ON).</li>
+            <li>Added 18 new 2D graphs for Throughput vs RTT, Sent packet size vs RTT, Cumulative/Frequency RTT distributions, and Packet IDs vs RTT.</li>
+            <li>Reorganized main application window.</li>
+            <li>Fixed throughput graphs, trace level at destination node, trace level description for delays, and main window UI bugs.</li>
+        </ul>
+    </div>
+
+    <!-- 1.92b - 1.90b -->
+    <div class="version-card">
+        <div class="version-header">
+            <span class="version-title">Versions 1.90b – 1.92b</span>
+            <span class="version-date">Nov – Dec 2002</span>
+        </div>
+        <ul class="changelog-list">
+            <li><strong>1.92b (12/02/2002):</strong> Faster 3D graphs calculations.</li>
+            <li><strong>1.91b (11/28/2002):</strong> Fixed automatic format detection, configuration file, and <code>-ip</code> option bugs.</li>
+            <li><strong>1.90b (11/25/2002):</strong> Added automatic detection of all supported file formats (header no longer required), new configuration file options, editable axes labels and graph titles, path/filename display in Graphs and Statistics window.</li>
+        </ul>
+    </div>
+
+    <!-- 1.88b -->
+    <div class="version-card">
+        <div class="version-header">
+            <span class="version-title">Version 1.88b</span>
+            <span class="version-date">11/17/2002</span>
+        </div>
+        <span class="section-subtitle section-features">Major Additions</span>
+        <ul class="changelog-list">
+            <li>Saving graph statistical data: minimum, mean, maximum, standard deviation, and median.</li>
+            <li>Logarithmic scaling on X, Y, and Z axes.</li>
+            <li>Ability to load graphs directly from <code>.trg</code> text files.</li>
+            <li>Added 100 new 2D graphs (Packet size vs min/avg/max throughput, jitter, simulation processing time, End2End delays).</li>
+            <li>Pre-validation of Trace graph scripts before execution; faster throughput calculations; zoom bug fixes.</li>
+        </ul>
+    </div>
+
+    <!-- 1.70b - 1.71b -->
+    <div class="version-card">
+        <div class="version-header">
+            <span class="version-title">Versions 1.70b – 1.71b</span>
+            <span class="version-date">October 2002</span>
+        </div>
+        <ul class="changelog-list">
+            <li><strong>1.71b (10/23/2002):</strong> Support for BlueHoc simulation trace files; fixed turbo mode, processing times, and script processing.</li>
+            <li><strong>1.70b (10/22/2002):</strong> Turbo mode for delays and jitter calculations; code optimizations for calculations of delays, processing times, and intermediate nodes; added configuration file and toggle button for switching between CN and ON; support for trace files with arbitrary extensions; satellite trace format fixes.</li>
+        </ul>
+    </div>
+
+    <!-- 1.52b - 1.60b -->
+    <div class="version-card">
+        <div class="version-header">
+            <span class="version-title">Versions 1.52b – 1.60b</span>
+            <span class="version-date">May – July 2002</span>
+        </div>
+        <ul class="changelog-list">
+            <li><strong>1.60b (07/01/2002):</strong> Added script automation to analyze trace or .mat files automatically.</li>
+            <li><strong>1.57b (06/18/2002):</strong> Packet size filter option; Count packet IDs only once option with drop events; updated .mat file format.</li>
+            <li><strong>1.55b / 1.55c (June 2002):</strong> Added trace levels (AGT, RTR, MAC) for End2End delays; flow ID bug fixes.</li>
+            <li><strong>1.54b (05/26/2002):</strong> Flow ID option for wired trace files; added forward/receive event times vs processing times 2D graphs.</li>
+            <li><strong>1.52b (05/23/2002):</strong> Separate windows for graphs and statistics; new statistics for intermediate nodes and processing times.</li>
+        </ul>
+    </div>
+
+    <!-- 1.40b - 1.46b -->
+    <div class="version-card">
+        <div class="version-header">
+            <span class="version-title">Versions 1.40b – 1.46b</span>
+            <span class="version-date">April – May 2002</span>
+        </div>
+        <ul class="changelog-list">
+            <li><strong>1.46b (05/06/2002):</strong> Packet type selection/deselection; full line loading for wireless traces; updated .mat format.</li>
+            <li><strong>1.44b (04/24/2002):</strong> Added packet IDs vs jitter 2D graphs; customizable X/Y axes labels.</li>
+            <li><strong>1.43b (04/22/2002):</strong> Send/receive event times vs intermediate nodes graphs; customizable histogram edges.</li>
+            <li><strong>1.40b (04/06/2002):</strong> Added wired-wireless and wired-new trace formats; IP addresses support; 22 new 2D graphs; major/minor axes grids; data point markers; command-line execution support.</li>
+        </ul>
+    </div>
+
+    <!-- 1.20b - 1.30b -->
+    <div class="version-card">
+        <div class="version-header">
+            <span class="version-title">Versions 1.20b – 1.30b</span>
+            <span class="version-date">Jan – March 2002</span>
+        </div>
+        <ul class="changelog-list">
+            <li><strong>1.30b (03/07/2002):</strong> Fixed time interval loading, jitter calculations, and Trace graph format parser.</li>
+            <li><strong>1.28b (02/27/2002):</strong> Added 2D jitter graphs for sent, generated, forwarded, and dropped packets.</li>
+            <li><strong>1.27b (02/25/2002):</strong> Added packet IDs and sequence numbers graphs; bandwidth graphs; menu reorganization.</li>
+            <li><strong>1.24b (02/20/2002):</strong> Added cumulative packet size sums, bandwidth graphs, and 6 new 3D byte-distribution graphs.</li>
+            <li><strong>1.22b (02/13/2002):</strong> 3x faster delays calculations.</li>
+            <li><strong>1.21b (02/11/2002):</strong> Simulation length calculation; updated .mat format; wired format fixes.</li>
+            <li><strong>1.20b (01/20/2002):</strong> Exporting all analysis data to text files.</li>
+        </ul>
+    </div>
+
+    <!-- 1.02b - 1.19b -->
+    <div class="version-card">
+        <div class="version-header">
+            <span class="version-title">Versions 1.02b – 1.19b</span>
+            <span class="version-date">Dec 2001 – Jan 2002</span>
+        </div>
+        <ul class="changelog-list">
+            <li><strong>1.19b (01/18/2002):</strong> Trace file loading up to 5x (NS-2) and 50x (Trace graph format) faster.</li>
+            <li><strong>1.16b – 1.18b (Jan 2002):</strong> Skip unused wired lines; save plotted data to text files; hexadecimal node parsing; TORA routing fixes.</li>
+            <li><strong>1.15b (01/11/2002):</strong> Export graphs to JPEG/TIFF; copy to clipboard; Direct connection analysis option.</li>
+            <li><strong>1.12b – 1.13b (Jan 2002):</strong> Cumulative distribution functions (CDF) for delays; 3D lost packets graph; zoom/legend toggle.</li>
+            <li><strong>1.10b (12/28/2001):</strong> Support for new-trace format; universal conversion to Trace graph format; time intervals; 12 new graphs.</li>
+            <li><strong>1.02b – 1.05b (Dec 2001):</strong> Initial public releases with wireless trace support, 3D packet graphs, node statistics, and high-speed loading.</li>
+        </ul>
+    </div>
+
+    <footer>
+        <p>Trace graph Version History | Network Simulator NS-2 Analyzer</p>
+    </footer>
+</div>
 
 </body>
-
 </html>

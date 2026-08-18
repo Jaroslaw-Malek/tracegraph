@@ -1,96 +1,288 @@
-<html><head>
-<title>Network Simulator NS-2 trace files analyzer - Tracegraph</title>
-<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"> 
-<META Name="revisit-after" Content="1 Day">
-<META Name="Description" Content="Network simulator, trace graph, analysis, graphs, trace, 2D/3D visualization, network solutions, wireless, wired, networks, packet, monitoring">
-<META Name="Keywords" Content="network simulator, trace graph, tracegraph, ns-2, ns2, ns, trace analysis, trace files, network simulation, network monitor, analyze network traffic, ns-3, graphs, ns-2 traces analysis, packet sniffer, manet">
-<META Name="Author" Content="Jaroslaw Malek">
-<style>
-<!--
-.tgdef       { font-family: Verdana; font-size: 11px }
-.tgbold      { font-family: Verdana; font-size: 11px; font-weight: bold }
--->
-</style>
-</head>
-<!--COLOR-->
-<body bgcolor="ffffff">
-<!--BODY-->
-<table border="0" width="100%" bordercolor="#FFFFFF">
-  <tr>
-    <td width="100%" colspan="2">
-      <p align="center"><b><font face="Verdana" size="4">Trace graph - Network Simulator NS-2 trace files analyser</font></b></td>
-  </tr>
-  <tr>
-    <td width="17%">
-      <p align="left"></p>
-    </td>
-    <td width="83%">
-<p align="right" class="tgdef"><i><font face="Verdana">Last update: October 8, 2007</font></i></p>
-    </td>
-  </tr>
-</table>
-<p align="left" style="line-height: 100%; margin-top: 2; margin-bottom: 2" class="tgdef">&nbsp;</p>
-<p align="left" style="line-height: 100%; margin-left: 0; margin-top: 3; margin-bottom: 3" class="tgdef"><font face="Verdana"><i>Trace graph</i> is a free network trace files analyser developed for network simulator ns-2 trace processing.</font></p>
-<p align="left" style="line-height: 100%; margin-left: 0; margin-top: 3; margin-bottom: 3" class="tgdef"><font face="Verdana"><i>Trace graph</i> can support any trace format if converted to its own or ns-2 trace format.</font></p>
-<p align="left" style="line-height: 100%; margin-left: 0; margin-top: 3; margin-bottom: 3" class="tgdef"> <font face="Verdana"> <i>Trace graph</i> runs under Windows, Linux, UNIX and MAC OS systems.</font></p>
-<p align="left" style="line-height: 100%; margin-left: 0; margin-top: 3; margin-bottom: 3" class="tgdef"><font face="Verdana"><i>Trace converter</i> processes traces over 80x faster and is available to buy.</font></p>
-<p align="left" style="line-height: 100%; margin-left: 0; margin-top: 13; margin-bottom: 3" class="tgdef"> <font face="Verdana"> Supported ns-2 trace file
-formats:</font></p>
-<ul>
-  <li>
-    <p align="left" style="line-height: 100%; margin-left: 0; margin-top: 3; margin-bottom: 3" class="tgdef"><font face="Verdana">wired</font></li>
-  <li>
-    <p align="left" style="line-height: 100%; margin-left: 0; margin-top: 3; margin-bottom: 3" class="tgdef"><font face="Verdana">satellite</font></li>
-  <li>
-    <p align="left" style="line-height: 100%; margin-left: 0; margin-top: 3; margin-bottom: 3" class="tgdef"><font face="Verdana">wireless
-    (old and new trace)</font></li>
-  <li>
-    <p align="left" style="line-height: 100%; margin-left: 0; margin-top: 3; margin-bottom: 3" class="tgdef"><font face="Verdana">new
-    trace</font></li>
-  <li>
-    <p align="left" style="line-height: 100%; margin-left: 0; margin-top: 3; margin-bottom: 3" class="tgdef"><font face="Verdana">wired-wireless.</font></li>
-</ul>
-<p align="left" style="line-height: 100%; margin-left: 0; margin-top: 3; margin-bottom: 3" class="tgdef"><font face="Verdana">Some
-of the program features (version 2.05):</font>
-<ul>
-  <li>
-    <p align="left" style="line-height: 100%; margin-left: 0; margin-top: 3; margin-bottom: 3" class="tgdef"><font face="Verdana">238
-    2D graphs</font></li>
-  <li>
-    <p align="left" style="line-height: 100%; margin-left: 0; margin-top: 3; margin-bottom: 3" class="tgdef"><font face="Verdana">12
-    3D graphs</font></li>
-  <li>
-    <p align="left" style="line-height: 100%; margin-left: 0; margin-top: 3; margin-bottom: 3" class="tgdef"><font face="Verdana">delays,
-    jitter, processing times, round trip times,
-    throughput graphs and statistics</font></li>
-  <li>
-    <p align="left" style="line-height: 100%; margin-left: 0; margin-top: 3; margin-bottom: 3" class="tgdef"><font face="Verdana">
-    whole network, link and node graphs and statistics</font></li>
-  <li>
-    <p align="left" style="line-height: 100%; margin-left: 0; margin-top: 3; margin-bottom: 3" class="tgdef"><font face="Verdana">all
-    the results can be saved to text files, graphs can also be saved as jpeg and
-    tiff</font></li>
-  <li>
-    <p align="left" style="line-height: 100%; margin-left: 0; margin-top: 3; margin-bottom: 3" class="tgdef"><font face="Verdana">x,
-    y, z axes information: minimum, mean, maximum, standard deviation, median</font></li>
-  <li>
-    <p align="left" style="line-height: 100%; margin-left: 0; margin-top: 3; margin-bottom: 3" class="tgdef"><font face="Verdana">any
-    graph saved in text file with 2 or 3 columns can be plotted</font></li>
-  <li>
-    <p align="left" style="line-height: 100%; margin-left: 0; margin-top: 3; margin-bottom: 3" class="tgdef"><font face="Verdana">script
-files processing to do the analysis automatically.</font></li>
-</ul>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Network Simulator NS-2 trace files analyzer - Tracegraph</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"> 
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="revisit-after" content="1 Day">
+    <meta name="Description" content="Network simulator, trace graph, analysis, graphs, trace, 2D/3D visualization, network solutions, wireless, wired, networks, packet, monitoring">
+    <meta name="Keywords" content="network simulator, trace graph, tracegraph, ns-2, ns2, ns, trace analysis, trace files, network simulation, network monitor, analyze network traffic, ns-3, graphs, ns-2 traces analysis, packet sniffer, manet">
+    <meta name="Author" content="Jaroslaw Malek">
 
-<p align="left" style="line-height: 100%; margin-left: 0; margin-top: 0; margin-bottom: 0" class="tgdef"><a href="http://www.isi.edu/nsnam/ns/" target="_blank"><b>Network Simulator ns-2</b></a> - enables discrete event simulations.</p><br>
-<p align="left" style="line-height: 100%; margin-left: 0; margin-top: 0; margin-bottom: 2" class="tgdef"><b><a href="download.html" target="_blank">Download</a></b> <i>Trace graph</i> and <i>Trace converter</i>, read conference paper, join the discussion forum, check related web sites.</p>
-<p align="left" style="line-height: 100%; margin-top: 2; margin-bottom: 2" class="tgdef">&nbsp;
-<p align="left" style="line-height: 100%; margin-top: 2; margin-bottom: 2" class="tgdef"><a href="screenshots.html" target="_blank"><b>Screenshots</b></a> from <i>Trace graph </i>(version 2.00b).
-<br><br>
-<p align="left" style="line-height: 100%; margin-left: 0; margin-top: 3; margin-bottom: 3" class="tgdef"><font face="Verdana">I
-studied from 1997 to 2003 at <a href="https://pwr.edu.pl/en/" target="_blank"><b>Wroclaw University
-of Science and Technology</b></a>, Poland.</font></p>
-<p align="left" style="line-height: 100%; margin-left: 0; margin-top: 3; margin-bottom: 3" class="tgdef"><font face="Verdana">
-I'm a graduate in computer science and mathematics. <i>Trace graph </i>was developed as part of my Master's thesis.</font></p>
-<p align="left" class="tgdef">Contact: <b><i><a href="mailto:jaroslaw_malek@interia.pl">Jaroslaw Malek</a></i></b></p>
+    <style>
+        :root {
+            --primary: #0284c7;
+            --primary-hover: #0369a1;
+            --bg-main: #f8fafc;
+            --card-bg: #ffffff;
+            --text-main: #1e293b;
+            --text-muted: #64748b;
+            --border-color: #e2e8f0;
+            --accent: #0f172a;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--bg-main);
+            color: var(--text-main);
+            line-height: 1.6;
+            padding: 24px 16px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        header {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 32px 24px;
+            margin-bottom: 24px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 26px;
+            color: var(--accent);
+            margin-bottom: 8px;
+            line-height: 1.3;
+        }
+
+        .subtitle {
+            color: var(--text-muted);
+            font-size: 15px;
+            margin-bottom: 20px;
+        }
+
+        .badge-bar {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 8px;
+            margin-bottom: 24px;
+        }
+
+        .badge {
+            background-color: #e0f2fe;
+            color: #0369a1;
+            font-size: 12px;
+            font-weight: 600;
+            padding: 4px 10px;
+            border-radius: 9999px;
+        }
+
+        .btn-group {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 12px;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.2s ease;
+        }
+
+        .btn-primary {
+            background-color: var(--primary);
+            color: #ffffff;
+        }
+
+        .btn-primary:hover {
+            background-color: var(--primary-hover);
+        }
+
+        .btn-secondary {
+            background-color: #ffffff;
+            color: var(--text-main);
+            border: 1px solid var(--border-color);
+        }
+
+        .btn-secondary:hover {
+            background-color: #f1f5f9;
+        }
+
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 24px;
+            margin-bottom: 24px;
+        }
+
+        @media (min-width: 768px) {
+            .grid-2 {
+                grid-template-columns: 1fr 1fr;
+            }
+            h1 {
+                font-size: 30px;
+            }
+        }
+
+        .card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 24px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+        }
+
+        .card h2 {
+            font-size: 18px;
+            color: var(--accent);
+            margin-bottom: 16px;
+            border-bottom: 2px solid #f1f5f9;
+            padding-bottom: 8px;
+        }
+
+        .card p {
+            margin-bottom: 12px;
+            font-size: 14.5px;
+            color: #334155;
+        }
+
+        ul.feature-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        ul.feature-list li {
+            position: relative;
+            padding-left: 20px;
+            margin-bottom: 10px;
+            font-size: 14px;
+            color: #334155;
+        }
+
+        ul.feature-list li::before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: var(--primary);
+            font-weight: bold;
+        }
+
+        .author-section {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 24px;
+            margin-bottom: 24px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+        }
+
+        .author-section h2 {
+            font-size: 18px;
+            color: var(--accent);
+            margin-bottom: 12px;
+        }
+
+        .author-section p {
+            font-size: 14.5px;
+            color: #334155;
+            margin-bottom: 10px;
+        }
+
+        a {
+            color: var(--primary);
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        footer {
+            text-align: center;
+            font-size: 13px;
+            color: var(--text-muted);
+            padding: 16px 0;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <h1>Trace graph</h1>
+        <p class="subtitle">Network Simulator NS-2 trace files analyser</p>
+        
+        <div class="badge-bar">
+            <span class="badge">Windows</span>
+            <span class="badge">Linux / UNIX</span>
+            <span class="badge">Mac OS</span>
+            <span class="badge">NS-2 Support</span>
+        </div>
+
+        <div class="btn-group">
+            <a href="download.html" class="btn btn-primary">Download Trace graph</a>
+            <a href="screenshots.html" class="btn btn-secondary">Screenshots</a>
+            <a href="traceconverter.html" class="btn btn-secondary">Trace converter</a>
+        </div>
+    </header>
+
+    <div class="grid-2">
+        <!-- O PROGRAMIE -->
+        <div class="card">
+            <h2>About Trace graph</h2>
+            <p><strong>Trace graph</strong> is a free network trace files analyser developed for network simulator ns-2 trace processing.</p>
+            <p>Trace graph can support any trace format if converted to its own or ns-2 trace format.</p>
+            <p>It runs smoothly under Windows, Linux, UNIX, and Mac OS systems.</p>
+            <p><strong>Trace converter</strong> processes traces over 80x faster.</p>
+            
+            <h2 style="margin-top: 20px;">Supported NS-2 Formats</h2>
+            <ul class="feature-list">
+                <li>Wired</li>
+                <li>Satellite</li>
+                <li>Wireless (old and new trace)</li>
+                <li>New trace</li>
+                <li>Wired-wireless</li>
+            </ul>
+        </div>
+
+        <!-- FUNKCJE -->
+        <div class="card">
+            <h2>Key Features (Version 2.05)</h2>
+            <ul class="feature-list">
+                <li><strong>238 2D graphs</strong> & <strong>12 3D graphs</strong></li>
+                <li>Delays, jitter, processing times, round trip times, throughput graphs, and statistics</li>
+                <li>Whole network, individual link, and node graphs and statistics</li>
+                <li>All results can be saved to text files; graphs can be exported as JPEG and TIFF</li>
+                <li>X, Y, Z axes statistical data: minimum, mean, maximum, standard deviation, median</li>
+                <li>Plot any graph saved in a text file with 2 or 3 columns</li>
+                <li>Batch processing via script files for automated analysis</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- SEKCJA AUTORA I POWIĄZAŃ -->
+    <div class="author-section">
+        <h2>About the Project</h2>
+        <p>I studied from 1997 to 2003 at <a href="https://pwr.edu.pl/en/" target="_blank"><strong>Wroclaw University of Science and Technology</strong></a>, Poland.</p>
+        <p>I'm a graduate in computer science and mathematics. <em>Trace graph</em> was developed as part of my Master's thesis.</p>
+        <p>Related links: <a href="http://www.isi.edu/nsnam/ns/" target="_blank"><strong>Network Simulator ns-2</strong></a> (enables discrete event simulations).</p>
+        <p style="margin-top: 12px;">Contact: <a href="mailto:jaroslaw_malek@interia.pl"><strong>Jarosław Małek</strong></a></p>
+    </div>
+
+    <footer>
+        <p>Last update: August 18, 2026 | Trace graph - NS-2 Trace Analyser</p>
+    </footer>
+</div>
+
 </body>
 </html>
