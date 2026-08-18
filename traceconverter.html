@@ -1,0 +1,197 @@
+<html><head>
+<title>Network Simulator NS-2 trace files converter to Trace graph format - Trace converter</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<META Name="revisit-after" Content="1 Day">
+<META Name="Description" Content="Network simulations trace analysis, 2D/3D Visualization, wireless and wired networks, network solutions for packets monitoring">
+<META Name="Keywords" Content="network simulator, trace graph, ns-2, ns2, ns, trace analysis, trace files, network simulation, network monitor, trace analyze, ns3, ns traces graphs, ns-2 traces analysis, packets sniffer, network solutions, manet">
+<META Name="Author" Content="Jaroslaw Malek">
+<style>
+<!--
+.tgdef       { font-family: Verdana; font-size: 11px }
+-->
+</style>
+</head>
+<!--COLOR-->
+<body bgcolor="ffffff">
+<!--BODY-->
+<table border="0" width="100%" bordercolor="#FFFFFF">
+  <tr>
+    <td width="100%" colspan="2">
+      <p align="center"><b><font face="Verdana" size="4">Trace converter - Network Simulator NS-2 trace files
+      converter</font></b></td>
+  </tr>
+  <tr>
+    <td width="17%">
+      <p align="left"></p>
+    </td>
+    <td width="83%">
+<p align="right" class="tgdef"><i>Last update: April 28, 2008</i></p>
+    </td>
+  </tr>
+</table>
+<p align="left" style="line-height: 100%; margin-top: 2; margin-bottom: 2" class="tgdef">&nbsp;</p>
+<p align="left" style="line-height: 120%; margin-top: 3; margin-bottom: 3" class="tgdef"><i>&nbsp;&nbsp;&nbsp;
+Trace converter</i> has been developed with <a href="http://www.freepascal.org" target="_blank"><b>Free
+Pascal</b></a> because <a href="index.html"> <b> Trace graph</b></a> (ns-2 trace files
+analyser) is very slow at parsing ns-2 trace files and converting them to it's own
+format (<i>Trace graph</i> format). <i> Trace graph</i> is written in <a href="http://www.mathworks.com" target="_blank"> <b> Matlab</b></a> which is not suitable
+for parsing complex files that's why is so slow because each trace file (except wired format)
+is converted to <i> Trace graph</i> format and saved to <i> "temp"</i> file before loading.
+Next <i> Trace graph</i> loads the converted <i> "temp"</i> file into memory and because the format
+after conversion is fixed, the file in <i> Trace graph</i> format is read as fast as Matlab can do
+it.&nbsp;</p>
+<p align="left" style="line-height: 120%; margin-top: 3; margin-bottom: 3" class="tgdef">&nbsp;&nbsp;&nbsp;
+Conversion to <i> Trace graph</i> format takes over 90% of total file loading time
+using <i>Trace graph</i>, so to load a file in <i> Trace graph</i> format takes below
+10% of the total time. Thanks to <i> Trace converter</i> the conversion to <i> Trace graph</i> format is
+almost instant (e.g. about one second for a 20MB file), so practically there is only up to 10% of the previous time (when conversion was done
+by <i> Trace graph</i>) to wait for the trace file to be loaded. See comparison
+table below. <i>Trace converter</i> is at least <b>80 TIMES FASTER</b> than <i> Trace graph
+2.05</i> and at least <b> 180 TIMES FASTER</b> than <i> Trace graph 2.02</i> at converting
+ns-2 trace files to <i> Trace graph</i> format. In case of trace files without
+IP addresses <i>Trace converter</i>  is at least <b>150 TIMES FASTER</b> than <i> Trace graph
+2.05</i> and over <b> 300 TIMES FASTER</b> than
+<i> Trace graph 2.02</i>.&nbsp;<i>Trace converter </i>has very low memory usage
+thanks to file streaming, so it's very fast, especially at converting large trace files.</p>
+<p align="left" style="line-height: 120%; margin-top: 3; margin-bottom: 3" class="tgdef">&nbsp;&nbsp;&nbsp;
+Once a trace file is converted by the converter into <i> Trace graph</i> format it can be read by
+<i> Trace graph.</i> <i> Trace converter</i> also uses 1/3 less disc space during IP addresses conversion because it does IPs + trace file conversion in one pass
+where <i> Trace graph</i> does it in two passes. <i> Trace converter</i> is a console application,
+so it works in text mode (e.g. on Linux it doesn't require X-Windows).</p>
+<p align="left" style="line-height: 120%; margin-top: 3; margin-bottom: 3" class="tgdef">&nbsp;&nbsp;&nbsp;
+<i>Trace converter</i> is also better than <i>Trace graph</i> at IP addresses with node numbers substitution,
+because <i> Trace converter</i> replaces only these fields, from a trace file, which can
+be IP addresses. <i> Trace graph</i> does only simple strings substitutions which can result in a bad output file, because
+for example there can be a packet number equal 2048 and the same IP address equal 2048, so after replacing 2048 with node number (e.g. 3),
+the packet number will be 3 instead of 2048 after conversion, which is not correct and the analysis results will be wrong.
+<i>Trace converter</i> will replace only the IP, so packet number will remain equal 2048.
+That's why <i> Trace converter</i> is better (and much faster) at IPs conversion than
+<i> Trace graph</i>.
+</p>
+<p align="left" style="line-height: 100%; margin-top: 4; margin-bottom: 4" class="tgdef">&nbsp;
+</p>
+<p align="left" style="line-height: 100%; margin-top: 4; margin-bottom: 4" class="tgdef"> Supported ns-2 trace file
+formats (also with hexadecimal node numbers and IP addresses):</p>
+<ul>
+  <li>
+    <p align="left" style="line-height: 100%; margin-top: 4; margin-bottom: 4" class="tgdef">old
+    wireless</li>
+  <li>
+    <p align="left" style="line-height: 100%; margin-top: 4; margin-bottom: 4" class="tgdef">new
+    trace</li>
+  <li>
+    <p align="left" style="line-height: 100%; margin-top: 4; margin-bottom: 4" class="tgdef">wired-old
+    wireless</li>
+  <li>
+    <p align="left" style="line-height: 100%; margin-top: 4; margin-bottom: 4" class="tgdef">wired-new
+    trace.</li>
+</ul>
+
+<p align="left" style="line-height: 100%; margin-top: 4; margin-bottom: 4" class="tgdef">Example
+speed comparison between <i>Trace converter</i> and <i>Trace graph</i><p align="left" style="line-height: 100%; margin-top: 4; margin-bottom: 4" class="tgdef">(conversion
+of a 25MB trace file in wired-new trace format with hexadecimal node numbers and
+IP addresses,<p align="left" style="line-height: 100%; margin-top: 4; margin-bottom: 4" class="tgdef">&nbsp;all
+times are in seconds, tests were run on a Celeron 1100MHz processor):<p align="left" style="line-height: 100%; margin-top: 4; margin-bottom: 4" class="tgdef">&nbsp;
+<table border="1" width="640">
+  <tr>
+    <td width="162">
+      <p class="tgdef" style="line-height: 100%; margin-top: 4; margin-bottom: 4">&nbsp;</p>
+    </td>
+    <td width="146" align="center">
+      <p class="tgdef" style="line-height: 100%; margin-top: 4; margin-bottom: 4"><b>Trace converter 1.00</b></p>
+    </td>
+    <td width="152" align="center">
+      <p class="tgdef" style="line-height: 100%; margin-top: 4; margin-bottom: 4"><b>Trace graph 2.02</b></p>
+    </td>
+    <td width="152" align="center">
+      <p class="tgdef" style="line-height: 100%; margin-top: 4; margin-bottom: 4"><b>Trace graph 2.04</b></p>
+    </td>
+  </tr>
+  <tr>
+    <td width="162">
+      <p class="tgdef" style="line-height: 100%; margin-top: 4; margin-bottom: 4">IP addresses extraction</p>
+    </td>
+    <td width="146" align="right">
+      <p class="tgdef" style="line-height: 100%; margin-top: 4; margin-bottom: 4"><b>1.30</b> sec.</p>
+    </td>
+    <td width="152" align="right">
+      <p class="tgdef" style="line-height: 100%; margin-top: 4; margin-bottom: 4"><b>457</b> sec.</p>
+    </td>
+    <td width="152" align="right">
+      <p class="tgdef" style="line-height: 100%; margin-top: 4; margin-bottom: 4"><b>95</b> sec.</p>
+    </td>
+  </tr>
+  <tr>
+    <td width="162">
+      <p class="tgdef" style="line-height: 100%; margin-top: 4; margin-bottom: 4">IP addresses to node numbers conversion time + trace file
+      conversion time</p>
+    </td>
+    <td width="146" align="right">
+      <p class="tgdef" style="line-height: 100%; margin-top: 4; margin-bottom: 4"><b>1.78</b> sec.</p>
+    </td>
+    <td width="152" align="right">
+      <p class="tgdef" style="line-height: 100%; margin-top: 4; margin-bottom: 4"><b>325</b> sec.</p>
+    </td>
+    <td width="152" align="right">
+      <p class="tgdef" style="line-height: 100%; margin-top: 4; margin-bottom: 4"><b>140</b> sec.</p>
+    </td>
+  </tr>
+</table>
+<p align="left" style="line-height: 100%; margin-top: 4; margin-bottom: 4" class="tgdef">Above
+example shows that user needs to wait only above <b>a second instead of few
+minutes</b> to convert a trace file!<p align="left" style="line-height: 100%; margin-top: 4; margin-bottom: 4" class="tgdef">In
+the result of the above conversion example a 9.1MB file in <i>Trace graph</i>
+format was created.<p align="left" style="line-height: 100%; margin-top: 4; margin-bottom: 4" class="tgdef">Then
+the file was loaded by <i>Trace graph</i>. The converted file loading times were:<p align="left" style="line-height: 100%; margin-top: 4; margin-bottom: 4" class="tgdef">&nbsp;
+<table border="1" width="250">
+  <tr>
+    <td width="50%" align="center">
+      <p class="tgdef" style="line-height: 100%; margin-top: 4; margin-bottom: 4"><b>Trace graph 2.02</b></p>
+    </td>
+    <td width="50%" align="center">
+      <p class="tgdef" style="line-height: 100%; margin-top: 4; margin-bottom: 4"><b>Trace graph 2.04</b></p>
+    </td>
+  </tr>
+  <tr>
+    <td width="50%" align="right">
+      <p class="tgdef" style="line-height: 100%; margin-top: 4; margin-bottom: 4"><b>39</b> sec.</p>
+    </td>
+    <td width="50%" align="right">
+      <p class="tgdef" style="line-height: 100%; margin-top: 4; margin-bottom: 4"><b>11</b> sec.</p>
+    </td>
+  </tr>
+</table>
+<p align="left" style="line-height: 100%; margin-top: 4; margin-bottom: 4" class="tgdef">Above
+table shows that <i>Trace graph 2.04</i> was over <b>3x faster</b> than <i>Trace
+graph 2.02</i> at loading the converted trace file in <i>Trace graph</i> format.
+
+<p align="left" style="line-height: 100%; margin-top: 4; margin-bottom: 4" class="tgdef">&nbsp;
+<p align="left" style="line-height: 100%; margin-top: 4; margin-bottom: 4" class="tgdef"><b><a href="downloadtraceconverter.html">DOWNLOAD
+Trace converter 1.01 binaries for Linux and Windows and source code (.pas files) to compile with Free Pascal</a></b>
+
+<p align="left" style="line-height: 100%; margin-top: 4; margin-bottom: 4" class="tgdef">&nbsp;<p align="left" class="tgdef" style="line-height: 100%; margin-top: 4; margin-bottom: 4">Contact: <b><i><a href="mailto:jaroslaw_malek@interia.pl">Jaroslaw Malek</a></i></b></p>
+<br>
+<p align="left" style="line-height: 1%; margin-top: 0; margin-bottom: 0"><font size="1" color="#FFFFFF">network
+simulator, trace graph, trace conversion, ns-2, ns2, ns, trace analysis, trace
+files, network simulation, traces analyze, trace analyze, trace analyse, ns
+traces graphs, ns-2 traces analysis, network simulation, trace tcp, packets
+sniffer, x-graph ns2, packets trace, satellite, trace conversion,&nbsp; satellite network,
+network simulator, trace graph, manet, ns-2, ns2, ns, satellite, internet, satellite
+network, trace analysis, manet, x-graph ns-2, trace files, network simulation, traces analyze, trace
+analyze, trace analyse, ns traces graphs, ns-2 traces analysis, network
+simulation, trace conversion, x-graph ns, packets sniffer, packets trace,
+satellite, manet, internet, satellite network, network simulator, trace graph, ns-2, ns2, ns, trace analysis, trace files, network simulation, traces analyze, trace analyze, trace analyse, ns traces graphs, ns-2 traces analysis, network simulation, trace tcp, packets sniffer, packets trace, network simulator, trace graph, ns-2, ns2, ns, trace analysis, trace files, network simulation, traces analyze, trace analyze, trace analyse, ns traces graphs, ns-2 traces analysis, network
+simulation, satellite, x graph network simulator, internet, manet, satellite network, 
+the dish network, computer network consulting, network monitoring, network solution, network tools, 
+network management tools, network management software, network management, network performance software, 
+network simulation software, satellite dish network, network analyzer, cell phones, remote access, 
+wan simulator, wan simulation, network management tools, cisco network simulator, computer network consulting, 
+network tools, network solution, network management software, network management, network monitoring, network performance software, 
+satellite dish network, network simulation software, cell phones, network analyzer, remote access, 
+wan simulation, wan simulator, cisco network simulator, the dish network, cisco network simulator, 
+wan simulation, remote access, wan simulator, cell phones, network analyzer, satellite dish network, 
+network simulation software, network performance software, network management, network management software, 
+network management tools, network tools, network monitoring, network solution, computer network consulting, the dish network
+</font></p>
+</body>
+</html>
