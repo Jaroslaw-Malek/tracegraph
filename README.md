@@ -1,4 +1,4 @@
-# tracegraph
+# Trace graph
 Trace graph trace files analyser for network simulator ns-2
 
 Copyright (c) 2001-2007 by Jaroslaw Malek
